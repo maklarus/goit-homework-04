@@ -6,13 +6,13 @@ body {
   background-color: #ffffff;
 }
 
-p,
 h1,
 h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+p {
   margin: 0;
 }
 
@@ -44,6 +44,8 @@ address {
 
 .link {
   text-decoration: none;
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ================================= PAGE-HEADER ============================== */
@@ -85,7 +87,11 @@ address {
   gap: 40px;
 }
 
-.navigate-list .link {
+.navigate-list-item {
+  position: relative;
+}
+
+.navigate-list-link {
   color: #2e2f42;
   line-height: 1.5;
   letter-spacing: 0.02em;
@@ -105,27 +111,50 @@ address {
   color: #404bbf;
 }
 
+.current-page {
+  color: #404bbf;
+}
+
+.current-page::after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -1px;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background-color: #404bbf;
+}
+
 .contacts-list {
   display: flex;
   gap: 40px;
 }
 
-.contacts-list .link {
+.contacts-list-link {
   color: #434455;
   line-height: 1.5;
   letter-spacing: 0.32px;
 }
 
-.contacts-list .link:hover,
-.contacts-list .link:focus {
+.contacts-list-link:hover,
+.contacts-list-link:focus {
   color: #404bbf;
 }
 
-/* ============================== hero-section ============================== */
+/* ============================== SECTION-HERO ============================== */
 
 .hero-section {
-  background-color: #2e2f42;
+  background-image: linear-gradient(
+      rgba(46, 47, 66, 0.7),
+      rgba(46, 47, 66, 0.7)
+    ),
+    url(../images/hero/people-office.png);
+  background-repeat: no-repeat;
+  background-size: cover;
   text-align: center;
+  max-width: 1440px;
+  margin: 0 auto;
 
   padding: 188px 0;
 }
@@ -158,6 +187,8 @@ address {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .btn:hover,
@@ -190,6 +221,17 @@ address {
   width: calc((100% - 72px) / 4);
 }
 
+.svg-advantages-container {
+  display: flex;
+  justify-content: center;
+  /* max-width: 264px; */
+  background-color: #f4f4fd;
+  border: 1px #8e8f99 solid;
+  border-radius: 4px;
+  padding: 24px 100px;
+  margin-bottom: 8px;
+}
+
 .advantages-item .item-title {
   color: #2e2f42;
   font-size: 20px;
@@ -206,7 +248,7 @@ address {
   letter-spacing: 0.02em;
 }
 
-/* ============================== team-section ============================== */
+/* ============================== SECTION-TEAM ============================== */
 
 .team-section {
   background-color: #f4f4fd;
@@ -231,6 +273,7 @@ address {
   background-color: #ffffff;
 
   border-radius: 0px 0px 4px 4px;
+  box-shadow: 0px 2px 1px rgba(46, 47, 66, 0.08);
 }
 
 .team-item:not(:last-child) {
@@ -257,8 +300,28 @@ address {
   font-size: 16px;
   line-height: 1.5;
   letter-spacing: 0.02em;
-
   text-align: center;
+  margin-bottom: 8px;
+}
+
+.social-links-list {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+}
+
+.link-social-links {
+  display: flex;
+  justify-content: center;
+  background-color: #4d5ae5;
+  padding: 12px 12px;
+  border-radius: 50%;
+
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.link-social-links:hover {
+  background-color: #404bbf;
 }
 
 /* ============================== SECTION-PORTFOLIO ============================== */
@@ -283,6 +346,42 @@ address {
 
 .portfolio-item {
   width: calc((100% - 48px) / 3);
+
+  transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.portfolio-item:hover {
+  box-shadow: 0px 2px 1px rgba(46, 47, 66, 0.08);
+}
+
+.overlay-container {
+  max-width: 100%;
+  max-height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.overlay {
+  width: 100%;
+  height: 100%;
+  padding: 40px 32px 32px;
+  position: absolute;
+  background-color: #404bbf;
+
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.portfolio-item:hover .overlay {
+  transform: translateY(-100%);
+}
+
+.text-overlay {
+  width: 296px;
+  height: 100%;
+  position: absolute;
+
+  color: #f4f4fd;
+  line-height: 1.33;
 }
 
 .portfolio-item .item-name {
@@ -303,8 +402,11 @@ address {
 }
 
 .item-text {
-  line-height: 1.5;
-  letter-spacing: 0.02em;
+  color: #434455;
+  font-size: 16px;
+  font-family: Roboto;
+  font-weight: 400;
+  line-height: 1.33;
 }
 
 /* ============================== PAGE-FOOTER ============================== */
@@ -337,4 +439,33 @@ address {
   letter-spacing: 0.32px;
 
   width: 264px;
+}
+
+.container-social-links {
+  width: 208px;
+}
+
+.page-footer .container {
+  display: flex;
+  gap: 120px;
+}
+
+.social-links-text {
+  color: white;
+  font-weight: 500;
+  line-height: 1.33;
+
+  margin-bottom: 16px;
+}
+
+.container-social-links .social-links-list {
+  gap: 16px;
+}
+
+.container-social-links .link-social-links {
+  padding: 8px;
+}
+
+.container-social-links .link-social-links:hover {
+  background-color: #31d0aa;
 }
